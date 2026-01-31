@@ -36,3 +36,11 @@ lerna-debug.log*
 .env
 .env.test
 .env.production
+
+# Secrets
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json
+
