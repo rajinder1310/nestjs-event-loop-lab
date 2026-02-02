@@ -11,11 +11,12 @@ This repository contains comprehensive guides, live demonstrations, and practica
 1. [Event Loop Fundamentals](#1-event-loop-fundamentals)
 2. [Blocking vs Non-Blocking](#2-blocking-vs-non-blocking)
 3. [Event Loop Phases](#3-event-loop-phases)
-4. [Worker Threads Solution](#4-worker-threads-solution)
-5. [Complete API Request Flow](#5-complete-api-request-flow)
-6. [Quick Start](#quick-start)
-7. [All Demonstrations](#all-demonstrations)
-8. [Key Takeaways](#key-takeaways)
+4. [Event Loop Priorities Explained](#4-event-loop-priorities-explained)
+5. [Worker Threads Solution](#5-worker-threads-solution)
+6. [Complete API Request Flow](#6-complete-api-request-flow)
+7. [Quick Start](#quick-start)
+8. [All Demonstrations](#all-demonstrations)
+9. [Key Takeaways](#key-takeaways)
 
 ---
 
@@ -170,7 +171,78 @@ npx ts-node poll-phase-demo.ts
 
 ---
 
-## 4. Worker Threads Solution
+## 4. Event Loop Priorities Explained
+
+"Who runs first?" is a common interview question. Let's understand the **VIP Priority System**.
+
+> **Concept:** Not all tasks are created equal. Some are VIPs (run immediately), and some are Regulars (wait in line).
+
+### The Hierarchy (Highest to Lowest)
+
+1.  **👑 `process.nextTick` (Super VIP)**
+    *   Runs **immediately** after the current operation finishes.
+    *   Before anything else (even Promises!).
+    *   *Analogy: "Stop everything, do this NOW."*
+
+2.  **⭐ `Promise` (VIP)**
+    *   Runs after `process.nextTick` but before the next Event Loop phase.
+    *   Known as "Microtasks".
+    *   *Analogy: "Do this before you move to the next customer."*
+
+3.  **🕰️ `setTimeout` / `setInterval` (Timers)**
+    *   Runs in the **Timers Phase**.
+    *   Standard priority.
+    *   *Analogy: "I have an appointment at this time."*
+
+4.  **✅ `setImmediate` (Check)**
+    *   Runs in the **Check Phase** (usually after I/O).
+    *   *Analogy: "Do this as soon as you're done dealing with I/O."*
+
+### ⚡ The Ultimate Priority Test
+
+Copy-paste this code to see who wins!
+
+```typescript
+console.log("1. Script Start");
+
+// 🕰️ Timer
+setTimeout(() => {
+  console.log("5. setTimeout (Macrotask)");
+}, 0);
+
+// ✅ Check
+setImmediate(() => {
+  console.log("6. setImmediate (Check Phase)");
+});
+
+// ⭐ Promise
+Promise.resolve().then(() => {
+  console.log("4. Promise (Microtask)");
+});
+
+// 👑 Next Tick
+process.nextTick(() => {
+  console.log("3. nextTick (Super VIP)");
+});
+
+console.log("2. Script End");
+```
+
+### The Output Order
+```text
+1. Script Start           (Synchronous code runs first)
+2. Script End             (Synchronous code finishes)
+3. nextTick (Super VIP)   (Runs immediately after sync code)
+4. Promise (Microtask)    (Runs after nextTick)
+5. setTimeout (Macrotask) (Timers phase)
+6. setImmediate (Check)   (Check phase)
+```
+
+> **Note:** The order between `setTimeout` and `setImmediate` can vary if not inside an I/O cycle, but `nextTick` and `Promise` will **ALWAYS** be first!
+
+---
+
+## 5. Worker Threads Solution
 
 ### The Problem
 
@@ -242,7 +314,7 @@ npx ts-node comparison-demo.ts
 
 ---
 
-## 5. Complete API Request Flow
+## 6. Complete API Request Flow
 
 ### The Journey: Browser to Server
 
