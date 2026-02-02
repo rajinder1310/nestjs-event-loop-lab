@@ -44,3 +44,24 @@ lerna-debug.log*
 *.pfx
 secrets.json
 
+# Event Loop Learning Files (Local only - not for Git)
+# Demo Scripts
+event-loop-architecture.ts
+blocking-demo.ts
+poll-phase-demo.ts
+task.ts
+task-with-worker.ts
+worker.ts
+comparison-demo.ts
+api-flow-demo.ts
+code.ts
+
+# Documentation
+EVENT_LOOP_GUIDE.md
+EVENT_LOOP_PHASES.md
+WORKER_THREADS_COMPARISON.md
+API_REQUEST_FLOW.md
+API_FLOW_QUICK_REFERENCE.md
+
+# Test files
+large-file.txt
