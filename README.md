@@ -6,20 +6,6 @@ This repository contains comprehensive guides, live demonstrations, and practica
 
 ---
 
-## 📚 Table of Contents
-
-1. [Event Loop Fundamentals](#1-event-loop-fundamentals)
-2. [Blocking vs Non-Blocking](#2-blocking-vs-non-blocking)
-3. [Event Loop Phases](#3-event-loop-phases)
-4. [Event Loop Priorities Explained](#4-event-loop-priorities-explained)
-5. [Worker Threads Solution](#5-worker-threads-solution)
-6. [Complete API Request Flow](#6-complete-api-request-flow)
-7. [Quick Start](#quick-start)
-8. [All Demonstrations](#all-demonstrations)
-9. [Key Takeaways](#key-takeaways)
-
----
-
 ## 🎯 What You'll Learn
 
 By studying this repository, you will master:
@@ -56,10 +42,6 @@ Million Requests → Single Event Loop → Thread Pool (4-128 threads)
 - 1 Waiter (Event Loop) serves all tables
 - Kitchen Staff (Thread Pool) does the cooking
 - Waiter never waits for food - just takes orders and delivers
-
-### 📖 Read More
-- **[EVENT_LOOP_GUIDE.md](./EVENT_LOOP_GUIDE.md)** - Complete architecture guide
-- **[event-loop-architecture.ts](./event-loop-architecture.ts)** - Live demo (Run it!)
 
 ### 🎮 Try It
 ```bash
@@ -100,8 +82,6 @@ When you use blocking operations:
 **With Blocking (1 second block):**
 - 10 users → User 1: 1s, User 2: 2s, User 3: 3s... User 10: 10s!
 
-### 📖 Read More
-- **[blocking-demo.ts](./blocking-demo.ts)** - See the problem in action!
 
 ### 🎮 Try It
 ```bash
@@ -157,10 +137,6 @@ Promise.resolve().then(() => console.log('2. Microtask'));
 // 3. Timers phase
 // 4. Check phase
 ```
-
-### 📖 Read More
-- **[EVENT_LOOP_PHASES.md](./EVENT_LOOP_PHASES.md)** - Complete phase guide
-- **[poll-phase-demo.ts](./poll-phase-demo.ts)** - Live demonstration
 
 ### 🎮 Try It
 ```bash
@@ -294,12 +270,6 @@ Promise resolved after 477ms  ❌ (blocked)
 Promise resolved after 4ms    ✅ (immediate!)
 ```
 
-### 📖 Read More
-- **[WORKER_THREADS_COMPARISON.md](./WORKER_THREADS_COMPARISON.md)** - Complete comparison
-- **[task-with-worker.ts](./task-with-worker.ts)** - Worker solution
-- **[worker.ts](./worker.ts)** - Worker script
-- **[comparison-demo.ts](./comparison-demo.ts)** - Side-by-side demo
-
 ### 🎮 Try It
 ```bash
 # See blocking behavior
@@ -424,10 +394,6 @@ Content-Type: application/json
 | Certificate | Not needed | Required |
 | Browser | "Not Secure" | 🔒 Padlock |
 
-### 📖 Read More
-- **[API_REQUEST_FLOW.md](./API_REQUEST_FLOW.md)** - Complete detailed guide
-- **[API_FLOW_QUICK_REFERENCE.md](./API_FLOW_QUICK_REFERENCE.md)** - Quick reference
-- **[api-flow-demo.ts](./api-flow-demo.ts)** - Live demonstration
 
 ### 🎮 Try It
 ```bash
@@ -551,25 +517,7 @@ npx ts-node api-flow-demo.ts
 6. **Certificates verify server identity**
 7. **HTTPS is mandatory for production**
 
----
-
-## 🎓 Learning Path
-
-**For Beginners:**
-1. Start with [EVENT_LOOP_GUIDE.md](./EVENT_LOOP_GUIDE.md)
-2. Run `event-loop-architecture.ts` demo
-3. Read [blocking-demo.ts](./blocking-demo.ts) code
-4. Understand the problem!
-
-**Intermediate:**
-1. Study [EVENT_LOOP_PHASES.md](./EVENT_LOOP_PHASES.md)
-2. Run `poll-phase-demo.ts`
-3. Learn execution order
-
-**Advanced:**
-1. Master Worker Threads with [WORKER_THREADS_COMPARISON.md](./WORKER_THREADS_COMPARISON.md)
-2. Understand complete API flow with [API_REQUEST_FLOW.md](./API_REQUEST_FLOW.md)
-3. Run all demos and understand output
+--
 
 ---
 
